@@ -12,11 +12,8 @@
 #include "input_reading.h"
 #include "debug_led.h"
 
-#define NO_OF_BUTTONS		3
-
 extern int status_led;
 extern int status;
-extern int mode;
 extern int counter;
 extern int CYCLE;
 
