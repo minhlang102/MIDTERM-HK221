@@ -19,8 +19,10 @@ void blink_led() {
 				setTimer0(1000);
 			}
 			//Degbug code
-
-			//
+		case 2:
+		case 3:
+		case 3:
+			//...
 		default:
 			break;
 	}
