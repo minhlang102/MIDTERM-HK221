@@ -959,8 +959,8 @@ void fsm_simple_buttons_run() {
  8000aa6:	3b02      	subs	r3, #2
  8000aa8:	4aa6      	ldr	r2, [pc, #664]	; (8000d44 <fsm_simple_buttons_run+0x2dc>)
  8000aaa:	6013      	str	r3, [r2, #0]
-				setTimer2(500);
- 8000aac:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+				setTimer2(1000);
+ 8000aac:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000ab0:	f000 fc6e 	bl	8001390 <setTimer2>
 			}
 			if (check_button_flag(0)) {
@@ -1208,8 +1208,8 @@ void fsm_simple_buttons_run() {
  8000c58:	601a      	str	r2, [r3, #0]
 				inc_counter();
  8000c5a:	f7ff fecd 	bl	80009f8 <inc_counter>
-				setTimer2(5000);
- 8000c5e:	f241 3088 	movw	r0, #5000	; 0x1388
+				setTimer2(10000);
+ 8000c5e:	f242 7010 	movw	r0, #10000	; 0x2710
  8000c62:	f000 fb95 	bl	8001390 <setTimer2>
 			}
 			if (check_button_flag(2)) {
@@ -1334,8 +1334,8 @@ void fsm_simple_buttons_run() {
  8000d44:	20000044 	.word	0x20000044
  8000d48:	200000c0 	.word	0x200000c0
 		case 4:
-			setTimer2(5000);
- 8000d4c:	f241 3088 	movw	r0, #5000	; 0x1388
+			setTimer2(10000);
+ 8000d4c:	f242 7010 	movw	r0, #10000	; 0x2710
  8000d50:	f000 fb1e 	bl	8001390 <setTimer2>
 			if (!is_button_pressed(2)) {
  8000d54:	2002      	movs	r0, #2

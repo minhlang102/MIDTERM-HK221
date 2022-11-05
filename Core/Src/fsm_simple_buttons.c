@@ -33,7 +33,7 @@ void fsm_simple_buttons_run() {
 			if (timer2_flag == 1) {
 				status = 5;
 				counter-=2;
-				setTimer2(500);
+				setTimer2(1000);
 			}
 			if (check_button_flag(0)) {
 				counter = 0;
@@ -110,7 +110,7 @@ void fsm_simple_buttons_run() {
 			if (check_button_flag(1)) {
 				status = 1;
 				inc_counter();
-				setTimer2(5000);
+				setTimer2(10000);
 			}
 			if (check_button_flag(2)) {
 				dec_counter();
@@ -147,7 +147,7 @@ void fsm_simple_buttons_run() {
 			}
 			break;
 		case 4:
-			setTimer2(5000);
+			setTimer2(10000);
 			if (!is_button_pressed(2)) {
 				status = 0;
 			}
