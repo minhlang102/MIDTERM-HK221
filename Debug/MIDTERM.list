@@ -1210,7 +1210,7 @@ void fsm_simple_buttons_run() {
  8000c56:	f000 fb25 	bl	80012a4 <setTimer1>
 			}
 			// Neu nut 2 duoc nhan thi counter giam 1
-			// Neu nut 2 chua tha thi counter giu nguyen gia tri
+			// Neu nut 2 duoc nhan trong 3s thi counter giu nguyen gia tri
 			// Neu nut 2 khong duoc nhan counter se giam 1 don vi moi giay
 			if (check_button_flag(2)) {
  8000c5a:	2002      	movs	r0, #2
@@ -1230,9 +1230,9 @@ void fsm_simple_buttons_run() {
 			}
 			break;
  8000c72:	e094      	b.n	8000d9e <fsm_simple_buttons_run+0x34e>
-			} else if (is_button_pressed(2)) {
+			} else if (is_button_pressed_3s(2)) {
  8000c74:	2002      	movs	r0, #2
- 8000c76:	f000 f961 	bl	8000f3c <is_button_pressed>
+ 8000c76:	f000 f97b 	bl	8000f70 <is_button_pressed_3s>
  8000c7a:	4603      	mov	r3, r0
  8000c7c:	2b00      	cmp	r3, #0
  8000c7e:	d004      	beq.n	8000c8a <fsm_simple_buttons_run+0x23a>
@@ -1283,7 +1283,7 @@ void fsm_simple_buttons_run() {
  8000cd2:	f000 fae7 	bl	80012a4 <setTimer1>
 			}
 			// Neu nut 1 duoc nhan thi counter giam 1
-			// Neu nut 1 chua tha thi counter giu nguyen gia tri
+			// Neu nut 1 duoc nhan trong 3s thi counter giu nguyen gia tri
 			// Neu nut 1 khong duoc nhan counter se giam 1 don vi moi giay
 			if (check_button_flag(1)) {
  8000cd6:	2001      	movs	r0, #1
@@ -1303,9 +1303,9 @@ void fsm_simple_buttons_run() {
 			}
 			break;
  8000cee:	e058      	b.n	8000da2 <fsm_simple_buttons_run+0x352>
-			} else if (is_button_pressed(1)) {
+			} else if (is_button_pressed_3s(1)) {
  8000cf0:	2001      	movs	r0, #1
- 8000cf2:	f000 f923 	bl	8000f3c <is_button_pressed>
+ 8000cf2:	f000 f93d 	bl	8000f70 <is_button_pressed_3s>
  8000cf6:	4603      	mov	r3, r0
  8000cf8:	2b00      	cmp	r3, #0
  8000cfa:	d004      	beq.n	8000d06 <fsm_simple_buttons_run+0x2b6>

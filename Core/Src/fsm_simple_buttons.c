@@ -111,12 +111,12 @@ void fsm_simple_buttons_run() {
 				setTimer1(1000);
 			}
 			// Neu nut 2 duoc nhan thi counter giam 1
-			// Neu nut 2 chua tha thi counter giu nguyen gia tri
+			// Neu nut 2 duoc nhan trong 3s thi counter giu nguyen gia tri
 			// Neu nut 2 khong duoc nhan counter se giam 1 don vi moi giay
 			if (check_button_flag(2)) {
 				dec_counter();
 				setTimer1(1000);
-			} else if (is_button_pressed(2)) {
+			} else if (is_button_pressed_3s(2)) {
 				setTimer1(1000);
 			} else if (timer1_flag == 1) {
 				inc_counter();
@@ -133,12 +133,12 @@ void fsm_simple_buttons_run() {
 				setTimer1(1000);
 			}
 			// Neu nut 1 duoc nhan thi counter giam 1
-			// Neu nut 1 chua tha thi counter giu nguyen gia tri
+			// Neu nut 1 duoc nhan trong 3s thi counter giu nguyen gia tri
 			// Neu nut 1 khong duoc nhan counter se giam 1 don vi moi giay
 			if (check_button_flag(1)) {
 				inc_counter();
 				setTimer1(1000);
-			} else if (is_button_pressed(1)) {
+			} else if (is_button_pressed_3s(1)) {
 				setTimer1(1000);
 			} else if (timer1_flag == 1) {
 				dec_counter();
