@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "glob.h"
+#include "global.h"
 #include "input_reading.h"
 #include "fsm_simple_buttons.h"
 #include "software_timer.h"

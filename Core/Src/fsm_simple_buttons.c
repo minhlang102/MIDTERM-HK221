@@ -7,15 +7,12 @@
 
 #include "fsm_simple_buttons.h"
 
-int last_counter = 0;
-
 void inc_counter() {
 	if (counter >= 9) {
 		counter = 0;
 	} else {
 		counter++;
 	}
-	last_counter = counter;
 }
 
 void dec_counter() {
@@ -24,91 +21,73 @@ void dec_counter() {
 	} else {
 		counter--;
 	}
-	last_counter = counter;
 }
 
 void fsm_simple_buttons_run() {
 	switch (status) {
-		case 0:
+		case INIT:
 			if (timer2_flag == 1) {
-				status = 5;
-				counter-=2;
-				setTimer2(1000);
-			}
-			if (check_button_flag(0)) {
-				counter = 0;
-			}
-			if (check_button_flag(1)) {
-				status = 1;
-				inc_counter();
-				setTimer2(10000);
-			}
-			if (check_button_flag(2)) {
-				status = 2;
-				dec_counter();
-				setTimer2(10000);
-			}
-			if (is_button_pressed_3s(1)){
-				status = 3;
-				inc_counter();
-				setTimer1(1000);
-			}
-			if (is_button_pressed_3s(2)){
-				status = 4;
-				dec_counter();
-				setTimer1(1000);
-			}
-			break;
-		case 1:
-			if (timer2_flag == 1) {
-				status = 5;
-				if (counter == 1) {
-					counter = 0;
-				} else {
-					counter-=2;
+				status = AUTO_COUNTDOWN;
+				if (counter > 0) {
+					counter--;
 				}
 				setTimer2(1000);
 			}
 			if (check_button_flag(0)) {
-				status = 0;
 				counter = 0;
 			}
 			if (check_button_flag(1)) {
+				status = INC_PRESSED;
 				inc_counter();
 				setTimer2(10000);
 			}
 			if (check_button_flag(2)) {
-				status = 2;
+				status = DEC_PRESSED;
 				dec_counter();
 				setTimer2(10000);
 			}
-			if (is_button_pressed_3s(1)){
-				status = 3;
-				inc_counter();
-				setTimer1(1000);
-			}
-			if (is_button_pressed_3s(2)){
-				status = 4;
-				dec_counter();
-				setTimer1(1000);
-			}
 			break;
-		case 2:
+		case INC_PRESSED:
 			if (timer2_flag == 1) {
-				status = 5;
-				if (counter == 1) {
-					counter = 0;
-				} else {
-					counter-=2;
+				status = AUTO_COUNTDOWN;
+				if (counter > 0) {
+					counter--;
 				}
 				setTimer2(1000);
 			}
 			if (check_button_flag(0)) {
-				status = 0;
+				status = INIT;
 				counter = 0;
 			}
 			if (check_button_flag(1)) {
-				status = 1;
+				inc_counter();
+				setTimer2(10000);
+			}
+			if (check_button_flag(2)) {
+				status = DEC_PRESSED;
+				dec_counter();
+				setTimer2(10000);
+			}
+			if (is_button_pressed_3s(1)){
+				status = INC_3S;
+				inc_counter();
+				setTimer1(1000);
+			}
+			break;
+		case DEC_PRESSED:
+			if (timer2_flag == 1) {
+				status = AUTO_COUNTDOWN;
+				if (counter > 0) {
+					counter--;
+				}
+				setTimer2(1000);
+			}
+			if (check_button_flag(0)) {
+				status = INIT;
+				counter = 0;
+			}
+			if (check_button_flag(1)) {
+				status = INC_PRESSED;
 				inc_counter();
 				setTimer2(10000);
 			}
@@ -116,26 +95,24 @@ void fsm_simple_buttons_run() {
 				dec_counter();
 				setTimer2(10000);
 			}
-			if (is_button_pressed_3s(1)){
-				status = 3;
-				inc_counter();
-				setTimer1(1000);
-			}
 			if (is_button_pressed_3s(2)){
-				status = 4;
+				status = DEC_3S;
 				dec_counter();
 				setTimer1(1000);
 			}
 			break;
-		case 3:
-			setTimer2(10000);
+		case INC_3S:
 			if (!is_button_pressed(1)) {
-				status = 0;
+				status = INIT;
+				setTimer2(10000);
 			}
 			if (check_button_flag(0)) {
 				counter = 0;
 				setTimer1(1000);
 			}
+			// Neu nut 2 duoc nhan thi counter giam 1
+			// Neu nut 2 chua tha thi counter giu nguyen gia tri
+			// Neu nut 2 khong duoc nhan counter se giam 1 don vi moi giay
 			if (check_button_flag(2)) {
 				dec_counter();
 				setTimer1(1000);
@@ -146,15 +123,18 @@ void fsm_simple_buttons_run() {
 				setTimer1(1000);
 			}
 			break;
-		case 4:
-			setTimer2(10000);
+		case DEC_3S:
 			if (!is_button_pressed(2)) {
-				status = 0;
+				status = INIT;
+				setTimer2(10000);
 			}
 			if (check_button_flag(0)) {
 				counter = 0;
 				setTimer1(1000);
 			}
+			// Neu nut 1 duoc nhan thi counter giam 1
+			// Neu nut 1 chua tha thi counter giu nguyen gia tri
+			// Neu nut 1 khong duoc nhan counter se giam 1 don vi moi giay
 			if (check_button_flag(1)) {
 				inc_counter();
 				setTimer1(1000);
@@ -165,22 +145,19 @@ void fsm_simple_buttons_run() {
 				setTimer1(1000);
 			}
 			break;
-		case 5:
+		case AUTO_COUNTDOWN:
 			if (check_button_flag(0)) {
-				status = 0;
+				status = INIT;
 				counter = 0;
 			}
 			if (timer2_flag == 1) {
-				if (counter <= 0 || counter == 1) {
-					counter = 0;
-				} else {
-					counter-=2;
+				if (counter > 0) {
+					counter--;
 				}
 				setTimer2(1000);
 			}
 			if (check_button_flag(1) || check_button_flag(2)) {
-				status = 0;
-				counter = last_counter;
+				status = INIT;
 				setTimer2(10000);
 			}
 			break;
